@@ -1,7 +1,7 @@
 use crate::repr::Json;
 use crate::utils::{
-    delimited_list, into, intoc, unescape, with_inputc, wrap_ws, ParserIteratorExt,
-    HIGH_SURROGATES, LOW_SURROGATES,
+    delimited_list, intoc, unescape, with_inputc, wrap_ws, ParserIteratorExt, HIGH_SURROGATES,
+    LOW_SURROGATES,
 };
 
 use nom::branch::alt;
@@ -12,7 +12,7 @@ use nom::combinator::mapc;
 use nom::combinator::*;
 use nom::error::{ErrorKind, ParseError};
 use nom::lib::std::collections::BTreeMap;
-use nom::number::complete::{double, recognize_float};
+use nom::number::complete::double;
 use nom::sequence::*;
 use nom::sequence::{delimitedc, precededc};
 use nom::Err::Failure;
@@ -56,7 +56,7 @@ pub fn parse_json_element<'a, E: Clone + ParseError<&'a str>>(input: &'a str) ->
     wrap_ws(parse_json)(input)
 }
 
-fn parse_json<'a, E: Clone + ParseError<&'a str>>(input: &'a str) -> JsonResult<'a, E> {
+pub fn parse_json<'a, E: Clone + ParseError<&'a str>>(input: &'a str) -> JsonResult<'a, E> {
     alt((
         parse_null,
         parse_true,

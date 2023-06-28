@@ -3,9 +3,10 @@ mod repr;
 mod utils;
 
 pub use nom::{
-    error::{ErrorKind, ParseError},
+    error::{ErrorKind, ParseError, VerboseError},
     Err, IResult,
 };
+pub use parser::parse_json as parser;
 pub use parser::parse_json_element as parse;
 pub use repr::{Json, JsonValue};
 
